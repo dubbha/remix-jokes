@@ -4,6 +4,7 @@ import { Link, useLoaderData } from "@remix-run/react";
 import { db } from "~/utils/db.server";
 
 export const loader = async () => {
+  // throw new Error("Testing Error Boundary in loader");
   const count = await db.joke.count();
   const randomRowNumber = Math.floor(Math.random() * count);
   const [randomJoke] = await db.joke.findMany({
@@ -14,6 +15,7 @@ export const loader = async () => {
 };
 
 export default function JokesIndexRoute() {
+  // throw new Error("Testing Error Boundary in component");
   const data = useLoaderData<typeof loader>();
 
   return (
@@ -23,6 +25,14 @@ export default function JokesIndexRoute() {
       <Link to={data.randomJoke.id}>
         "{data.randomJoke.name}" Permalink
       </Link>
+    </div>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="error-container">
+      I did a whoopsies.
     </div>
   );
 }

@@ -19,6 +19,7 @@ function validateJokeName(name: string) {
 }
 
 export const action = async ({ request }: ActionArgs) => {
+  // throw new Error("Testing Error Boundary in action");
   const userId = await requireUserId(request);
 
   const form = await request.formData();
@@ -129,6 +130,14 @@ export default function NewJokeRoute() {
           </button>
         </div>
       </form>
+    </div>
+  );
+}
+
+export function ErrorBoundary() {
+  return (
+    <div className="error-container">
+      Something unexpected went wrong. Sorry about that.
     </div>
   );
 }
