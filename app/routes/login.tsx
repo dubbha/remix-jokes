@@ -4,6 +4,7 @@ import type {
   V2_MetaFunction,
 } from "@remix-run/node";
 import {
+  Form,
   Link,
   useActionData,
   useSearchParams,
@@ -138,7 +139,7 @@ export default function Login() {
     <div className="container">
       <div className="content" data-light="">
         <h1>Login</h1>
-        <form method="post">
+        <Form method="post">
           <input
             type="hidden"
             name="redirectTo"
@@ -240,7 +241,7 @@ export default function Login() {
           <button type="submit" className="button">
             Submit
           </button>
-        </form>
+        </Form>
       </div>
       <div className="links">
         <ul>
