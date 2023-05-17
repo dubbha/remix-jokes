@@ -4,6 +4,7 @@ import {
   LiveReload,
   Outlet,
   useRouteError,
+  isRouteErrorResponse,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
 
@@ -58,6 +59,20 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+
+  if (isRouteErrorResponse(error)) {
+    return (
+      <Document
+        title={`${error.status} ${error.statusText}`}
+      >
+        <div className="error-container">
+          <h1>
+            {error.status} {error.statusText}
+          </h1>
+        </div>
+      </Document>
+    );
+  }
 
   const errorMessage =
     error instanceof Error
