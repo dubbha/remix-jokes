@@ -78,6 +78,17 @@ export default function JokesRoute() {
           </div>
         </div>
       </main>
+      <footer className="jokes-footer">
+        <div className="container">
+          <Link reloadDocument to="/jokes.rss">
+            RSS
+          </Link>
+          {' 🤪 '}
+          <Link reloadDocument to="/jokes.json">
+            JSON
+          </Link>
+        </div>
+      </footer>
     </div>
   );
 }
