@@ -132,7 +132,6 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function Login() {
-  // throw new Error("Testing the root Error Boundary");
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
   return (

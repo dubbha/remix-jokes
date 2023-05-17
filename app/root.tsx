@@ -4,6 +4,7 @@ import {
   LiveReload,
   Outlet,
   Meta,
+  Scripts,
   useRouteError,
   isRouteErrorResponse,
 } from "@remix-run/react";
@@ -67,6 +68,7 @@ function Document({
       </head>
       <body>
         {children}
+        <Scripts />
         <LiveReload />
       </body>
     </html>
@@ -83,6 +85,7 @@ export default function App() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+  console.error(error);
 
   if (isRouteErrorResponse(error)) {
     return (

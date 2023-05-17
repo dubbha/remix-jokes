@@ -9,6 +9,7 @@ import {
 import { db } from "~/utils/db.server";
 
 export const loader = async () => {
+  // throw new Error("server-side error logged in the browser's console");
   const count = await db.joke.count();
   const randomRowNumber = Math.floor(Math.random() * count);
   const [randomJoke] = await db.joke.findMany({
@@ -41,6 +42,7 @@ export default function JokesIndexRoute() {
 
 export function ErrorBoundary() {
   const error = useRouteError();
+  console.error(error);
 
   if (isRouteErrorResponse(error) && error.status === 404) {
     return (

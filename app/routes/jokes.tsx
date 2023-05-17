@@ -14,8 +14,6 @@ export const links: LinksFunction = () => [
 ];
 
 export const loader = async ({ request }: LoaderArgs) => {
-  // throw new Response("Testing root Error Boudnay", { status: 400, statusText: 'Bad Request' });
-
   const jokeListItems = await db.joke.findMany({
     orderBy: { createdAt: "desc" },
     select: { id: true, name: true },
