@@ -1,4 +1,5 @@
 import type { LoaderArgs } from "@remix-run/node";
+import { json } from "@remix-run/node";
 
 import { db } from "~/utils/db.server";
 
@@ -21,7 +22,7 @@ export const loader = async ({ request }: LoaderArgs) => {
   const domain = `${protocol}://${host}`;
   const jokesUrl = `${domain}/jokes`;
 
-  const jsonString = JSON.stringify({
+  const response = {
     jokes: jokes.map(joke => ({
       title: joke.name,
       description: `A funny joke called ${joke.name}`,
@@ -29,15 +30,11 @@ export const loader = async ({ request }: LoaderArgs) => {
       pubDate: joke.createdAt.toUTCString(),
       link: `${jokesUrl}/${joke.id}`,
     }))
-  });
+  };
 
-  return new Response(jsonString, {
+  return json(response, {
     headers: {
       "Cache-Control": `public, max-age=${60 * 10}, s-maxage=${60 * 60 * 24}`,
-      "Content-Type": "application/json",
-      "Content-Length": String(
-        Buffer.byteLength(jsonString)
-      )
     },
   });
 };

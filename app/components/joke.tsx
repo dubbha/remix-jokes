@@ -20,7 +20,7 @@ export function JokeDisplay({
           <button
             className="button"
             disabled={!canDelete}
-            name="intent"
+            name="intent" // https://youtu.be/w2i-9cYxSdc?t=130
             type="submit"
             value="delete"
           >
