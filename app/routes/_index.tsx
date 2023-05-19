@@ -25,8 +25,8 @@ export default function IndexRoute() {
               </Link>
             </li>
             <li>
-              <Link reloadDocument to="/jokes.json">
-                JSON
+              <Link to="/more">
+                More
               </Link>
             </li>
           </ul>

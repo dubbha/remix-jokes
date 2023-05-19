@@ -85,8 +85,8 @@ export default function JokesRoute() {
             RSS
           </Link>
           {' 🤪 '}
-          <Link reloadDocument to="/jokes.json">
-            JSON
+          <Link to="/more">
+            More
           </Link>
         </div>
       </footer>

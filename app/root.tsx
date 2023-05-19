@@ -7,6 +7,7 @@ import {
   Scripts,
   useRouteError,
   isRouteErrorResponse,
+  useLoaderData,
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
 
@@ -37,6 +38,14 @@ export const meta: V2_MetaFunction = () => {
     { title: "Remix: So great, it's funny!" },
   ];
 };
+
+export async function loader() {
+  return {
+    ENV: {
+      PUBLIC_KEY: process.env.PUBLIC_KEY,
+    },
+  };
+}
 
 function Document({
   children,
@@ -76,9 +85,16 @@ function Document({
 }
 
 export default function App() {
+  const data = useLoaderData<typeof loader>();
+
   return (
     <Document>
       <Outlet />
+      <script
+        dangerouslySetInnerHTML={{
+          __html: `window.ENV = ${JSON.stringify(data.ENV)}`,
+        }}
+      />
     </Document>
   );
 }
