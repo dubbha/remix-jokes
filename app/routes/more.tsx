@@ -20,6 +20,7 @@ export default function More () {
           <li><Link to="jokes.json" reloadDocument>JSON resource route</Link></li>
           <li><Link to="bff.json" reloadDocument>BFF - backend for frontend</Link></li>
           <li><Link to="public-env-var">Public Env Var</Link></li>
+          <li><Link to="defer">Defer</Link></li>
         </ul>
       </nav>
       <Outlet />
