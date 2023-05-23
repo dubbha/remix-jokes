@@ -8,6 +8,7 @@ import { defer } from "@remix-run/node";
 export async function loader() {
   // fast data, critical, above the fold, awaiting
   const mainContent = await queryMainContent().then(slow(250));
+
   // slow data, non-critical, below the fold
   const collections = queryCollections().then(slow(3000));
 
@@ -86,4 +87,15 @@ const List = ({ data }: Collection) => (
   </section>
 )
 
-const Skeleton = () => <div>List Loading Skeleton...</div>
+const Skeleton = () => (
+  <ul>
+    {[1, 2, 3].map(key =>
+      <li key={key}>
+        <div className="more-skeleton-container">
+          <div className="more-skeleton" style={{ height: '1.4rem', width: '130px' }} />
+          <div className="more-skeleton" style={{ width: '180px' }} />
+        </div>
+      </li>
+    )}
+  </ul>
+)
