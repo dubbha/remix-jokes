@@ -11,22 +11,10 @@ import {
 } from "@remix-run/react";
 import type { PropsWithChildren } from "react";
 
-import globalLargeStylesUrl from "~/styles/global-large.css";
-import globalMediumStylesUrl from "~/styles/global-medium.css";
-import globalStylesUrl from "~/styles/global.css";
+import tailwindStyles from "./tailwind.css";
 
 export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: globalStylesUrl },
-  {
-    rel: "stylesheet",
-    href: globalMediumStylesUrl,
-    media: "print, (min-width: 640px)",
-  },
-  {
-    rel: "stylesheet",
-    href: globalLargeStylesUrl,
-    media: "screen and (min-width: 1024px)",
-  },
+  { rel: "stylesheet", href: tailwindStyles },
 ];
 
 export const meta: V2_MetaFunction = () => {

@@ -98,7 +98,7 @@ export default function NewJokeRoute() {
 
   return (
     <div>
-      <p>Add your own hilarious joke</p>
+      <p className="mb-4">Add your own hilarious joke</p>
       <Form method="post">
         <div>
           <label>
@@ -178,7 +178,7 @@ export function ErrorBoundary() {
   if (isRouteErrorResponse(error) && error.status === 401) {
     return (
       <div className="error-container">
-        <p>You must be logged in to create a joke.</p>
+        <p className="py-4">You must be logged in to create a joke.</p>
         <Link to="/login">Login</Link>
       </div>
     );

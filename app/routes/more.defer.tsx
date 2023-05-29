@@ -18,7 +18,7 @@ export async function loader() {
   })
 }
 
-export default function Defer() {
+export default function DeferWithTailwind() {
   const { mainContent, collections } = useLoaderData<typeof loader>();
 
   return (
@@ -31,7 +31,9 @@ export default function Defer() {
           )}
         </Await>
       </Suspense>
-      <pre>--- Fold: slow data below me deferred ---</pre>
+
+      <pre className="my-4">--- Fold: slow data below me deferred ---</pre>
+
       <Suspense fallback={<Skeleton />}>
         <Await resolve={collections}>
           {(collections: Collection) => (
@@ -85,15 +87,35 @@ const List = ({ data }: Collection) => (
       </ul>
     ) : null}
   </section>
-)
+);
+
+const SkeletonLine = ({ extraClasses = "h-[1.4rem] w-32" }) => (
+  <div
+    className={`
+      relative
+      overflow-hidden
+      bg-white
+      bg-opacity-5
+      rounded-xl
+      after:absolute
+      after:top-0
+      after:right-0
+      after:bottom-0
+      after:left-0
+      after:translate-x-[-100%]
+      after:bg-shimmer
+      after:animate-shimmer
+      ${extraClasses}`}
+  />
+);
 
 const Skeleton = () => (
   <ul>
     {[1, 2, 3].map(key =>
       <li key={key}>
-        <div className="more-skeleton-container">
-          <div className="more-skeleton" style={{ height: '1.4rem', width: '130px' }} />
-          <div className="more-skeleton" style={{ width: '180px' }} />
+        <div className="flex flex-col gap-2 mb-2">
+          <SkeletonLine />
+          <SkeletonLine extraClasses="h-[1.1rem] w-[180px]" />
         </div>
       </li>
     )}

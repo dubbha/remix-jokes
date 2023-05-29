@@ -1,4 +1,4 @@
-import type { LinksFunction, LoaderArgs } from "@remix-run/node";
+import type { LoaderArgs } from "@remix-run/node";
 import {
   Form,
   Link,
@@ -6,13 +6,8 @@ import {
   useLoaderData,
 } from "@remix-run/react";
 
-import stylesUrl from "~/styles/jokes.css";
 import { db } from "~/utils/db.server";
 import { getUser } from "~/utils/session.server";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesUrl },
-];
 
 export const loader = async ({ request }: LoaderArgs) => {
   const jokeListItems = await db.joke.findMany({
@@ -29,21 +24,22 @@ export default function JokesRoute() {
   const data = useLoaderData<typeof loader>();
 
   return (
-    <div className="jokes-layout">
-      <header className="jokes-header">
-        <div className="container">
-          <h1 className="home-link">
+    <div className="flex flex-col min-h-[inherit]">
+      <header className="py-4 border-b border-b-border">
+        <div className="container flex justify-between items-center">
+          <h1 className="text-5xl">
             <Link
               to="/"
               title="Remix Jokes"
               aria-label="Remix Jokes"
+              className="text-foreground hover:text-foreground hover:no-underline"
             >
-              <span className="logo">🤪</span>
-              <span className="logo-medium">J🤪KES</span>
+              <span className="sm:hidden print:hidden">🤪</span>
+              <span className="hidden sm:block print:block">J🤪KES</span>
             </Link>
           </h1>
           {data.user ? (
-            <div className="user-info">
+            <div className="flex gap-4 items-center whitespace-nowrap">
               <span>{`Hi ${data.user.username}`}</span>
               <Form action="/logout" method="post">
                 <button type="submit" className="button">
@@ -52,16 +48,16 @@ export default function JokesRoute() {
               </Form>
             </div>
           ) : (
-            <Link to="/login">Login</Link>
+            <Link to="/login" className="hover-wavy">Login</Link>
           )}
         </div>
       </header>
-      <main className="jokes-main">
-        <div className="container">
-          <div className="jokes-list">
+      <main className="py-8 sm:py-12 grow shrink basis-full">
+        <div className="container flex gap-4 flex-col sm:flex-row">
+          <div className="max-w-[12rem]">
             <Link to=".">Get a random joke</Link>
-            <p>Here are a few more jokes to check out:</p>
-            <ul>
+            <p className="my-4">Here are a few more jokes to check out:</p>
+            <ul className="p-3 list-disc list-inside">
               {data.jokeListItems.map(({ id, name }) => (
                 <li key={id}>
                   <Link to={id} prefetch="intent">
@@ -74,12 +70,12 @@ export default function JokesRoute() {
               Add your own
             </Link>
           </div>
-          <div className="jokes-outlet">
+          <div className="flex-grow">
             <Outlet />
           </div>
         </div>
       </main>
-      <footer className="jokes-footer">
+      <footer className="pt-8 pb-4 border-t border-t-border">
         <div className="container">
           <Link reloadDocument to="/jokes.rss">
             RSS

@@ -1,0 +1,218 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "baloo";
+    src: url("/fonts/baloo/baloo.woff") format("woff");
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  :root {
+    --hs-links: 48deg 100%;
+    --color-links: var(--hs-links) 50%;
+    --color-links-hover: var(--hs-links) 45%;
+    --color-foreground: 0deg 0% 100%;
+    --color-background: 278deg 73% 19%;
+    --color-border: 277deg 85% 38%;
+    --color-invalid: 356deg 100% 71%;
+    --font-body: -apple-system, "Segoe UI", Helvetica Neue, Helvetica, Roboto,
+      Arial, sans-serif, system-ui, "Apple Color Emoji", "Segoe UI Emoji";
+    --bg-radial: radial-gradient(
+      circle,
+      rgb(152 11 238) 0%,
+      rgb(118 15 181) 35%,
+      rgb(58 13 85) 100%);
+  }
+
+  :focus {
+    outline: hsl(var(--color-links)) solid 2px;
+    outline-offset: 2px;
+  }
+
+  html,
+  body {
+    @apply text-foreground bg-background;
+  }
+
+  body {
+    @apply font-body bg-no-repeat min-h-[calc(100vh-env(safe-area-inset-bottom))];
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+
+  h1 {
+    @apply text-4xl sm:text-5xl lg:text-6xl print:text-5xl;
+  }
+
+  h2 {
+    @apply text-2xl sm:text-3xl lg:text-4xl print:text-3xl;
+  }
+
+  h3 {
+    @apply text-xl lg:text-2xl print:text-xl;
+  }
+
+  a {
+    @apply text-links no-underline;
+  }
+
+  a:hover {
+    @apply text-links-hover underline;
+  }
+
+  form {
+    @apply flex flex-col gap-4 w-full;
+  }
+
+  fieldset {
+    @apply border-0;
+  }
+
+  legend {
+    @apply block max-w-full mb-2 text-inherit whitespace-normal;
+  }
+
+  [type="text"],
+  [type="password"],
+  [type="date"],
+  [type="datetime"],
+  [type="datetime-local"],
+  [type="month"],
+  [type="week"],
+  [type="email"],
+  [type="number"],
+  [type="search"],
+  [type="tel"],
+  [type="time"],
+  [type="url"],
+  [type="color"],
+  textarea {
+    @apply appearance-none flex items-center w-full h-10 m-0 py-2 px-3
+      border border-border rounded bg-white/10 bg-blend-luminosity shadow-none
+      font-body font-normal text-base/6 text-foreground
+      [transition:box-shadow_200ms,border-color_50ms_ease-out,background-color_50ms_ease-out,color_50ms_ease-out]
+  }
+
+  [type="text"][aria-invalid="true"],
+  [type="password"][aria-invalid="true"],
+  [type="date"][aria-invalid="true"],
+  [type="datetime"][aria-invalid="true"],
+  [type="datetime-local"][aria-invalid="true"],
+  [type="month"][aria-invalid="true"],
+  [type="week"][aria-invalid="true"],
+  [type="email"][aria-invalid="true"],
+  [type="number"][aria-invalid="true"],
+  [type="search"][aria-invalid="true"],
+  [type="tel"][aria-invalid="true"],
+  [type="time"][aria-invalid="true"],
+  [type="url"][aria-invalid="true"],
+  [type="color"][aria-invalid="true"],
+  textarea[aria-invalid="true"] {
+    @apply border-invalid;
+  }
+
+  textarea {
+    @apply block min-h-[50px] max-w-full [&[rows]]:h-auto;
+  }
+
+  input:disabled,
+  input[readonly],
+  textarea:disabled,
+  textarea[readonly] {
+    @apply opacity-70 cursor-not-allowed;
+  }
+  
+  label {
+    @apply m-0;
+  }
+  
+  [type="checkbox"] + label,
+  [type="radio"] + label {
+    @apply ml-2;
+  }
+  
+  label > [type="checkbox"],
+  label > [type="radio"] {
+    @apply mr-2;
+  }
+  
+  input::placeholder,
+  textarea::placeholder {
+    @apply text-[hsl(0_0%_100%/65%)];
+  }
+
+  [data-light] {
+    @apply [--color-invalid:356deg_70%_39%]
+      text-background bg-foreground;
+  }
+
+  [data-light] [type="text"],
+  [data-light] [type="password"],
+  [data-light] [type="date"],
+  [data-light] [type="datetime"],
+  [data-light] [type="datetime-local"],
+  [data-light] [type="month"],
+  [data-light] [type="week"],
+  [data-light] [type="email"],  
+  [data-light] [type="number"],
+  [data-light] [type="search"],
+  [data-light] [type="tel"],
+  [data-light] [type="time"],
+  [data-light] [type="url"],
+  [data-light] [type="color"],
+  [data-light] textarea {
+    color: var(--color-background);
+    background-color: hsl(0 0% 0% / 10%);
+  }
+}
+
+@layer components {
+  .container {
+    @apply w-full max-w-[1024px]
+  }
+
+  .button {
+    @apply [--shadow-size:3px] [--raise:1px] [--press:1px]
+      [--shadow-color:hsl(var(--hs-links)_30%)]
+      appearance-none cursor-pointer inline-flex items-center justify-center
+      bg-links text-background font-display font-bold text-lg leading-none m-0
+      py-2.5 px-4 border-0 rounded outline-offset-2 translate-y-0
+      shadow-[0_var(--shadow-size)_0_0_var(--shadow-color)]
+      [transition:background-color_50ms_ease-out,box-shadow_50ms_ease-out,transform_100ms_cubic-bezier(0.3,0.6,0.8,1.25)]
+      hover:text-background hover:no-underline
+      hover:shadow-[0_calc(var(--shadow-size)+var(--raise))_0_0_var(--shadow-color)]
+      hover:translate-y-[calc(var(--raise)*-1)]
+      active:bg-links-hover
+      active:shadow-[0_calc(var(--shadow-size)-var(--press))_0_0_var(--shadow-color)]
+      active:translate-y-[var(--press)]
+      disabled:translate-y-0 aria-disabled:translate-y-0
+      disabled:pointer-events-none aria-disabled:pointer-events-none
+      disabled:opacity-70 aria-disabled:opacity-70
+      focus:[&:not(:focus-visible)]:outline-none;
+  }
+
+  .form-validation-error {
+    @apply m-0 mt-1 text-invalid text-[0.8rem];
+  }
+  
+  .error-container {
+    @apply bg-[hsla(356,_77%,_59%,_0.747)] rounded-[0.25rem] py-2 px-4;
+  }
+}
+
+@layer utilities {
+  .hover-wavy {
+    @apply hover:decoration-wavy hover:decoration-1;
+  }
+}
+

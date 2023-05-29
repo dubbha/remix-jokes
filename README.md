@@ -7,6 +7,9 @@
 ## More Examples
 Throwing more stuff at the `/more` route: [dubbha-remix-jokes.fly.dev/more](https://dubbha-remix-jokes.fly.dev/more)
 
+## Tailwind
+Switched to [Tailwind](https://tailwindcss.com/) at some point for more fun. Check out the [initial-styling](https://github.com/dubbha/remix-jokes/tree/initial-styling) branch for the original styling examples used in the tutorial.
+
 ## Deployment
 Deployed to [dubbha-remix-jokes.fly.dev](https://dubbha-remix-jokes.fly.dev/). Depending on the security configuration of your local machine the Deployment part of the tutorial might not go exactly as described, e.g. due to the `api.machines.dev` host access being blocked by `Infoblox BloxOne`, as in my case. I was able use the nice [Fly's Web CLI](https://fly.io/terminal) instead to deploy from github directly. If you've tried deploying locally and failed, first rollback all the local leftovers, or just don't push them to the repo. You might need to run the following commands:
 ```

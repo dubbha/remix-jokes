@@ -1,21 +1,13 @@
-import type { LinksFunction } from "@remix-run/node";
 import { Outlet, Link } from "@remix-run/react";
-
-import stylesUrl from "~/styles/more.css";
-
-export const links: LinksFunction = () => [
-  { rel: "stylesheet", href: stylesUrl },
-];
-
 
 export default function More () {
   return (
-    <div className="more-layout">
+    <div className="m-8">
       <h1>
-        <Link to="/" className="more-logo-link">🤪</Link>
+        <Link to="/" className="outline-none hover:no-underline">🤪</Link>
         {` More Examples`}
       </h1>
-      <nav className="more-nav">
+      <nav className="p-4">
         <ul>
           <li><Link to="jokes.json" reloadDocument>JSON resource route</Link></li>
           <li><Link to="bff.json" reloadDocument>BFF - backend for frontend</Link></li>

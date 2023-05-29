@@ -136,9 +136,12 @@ export default function Login() {
   const actionData = useActionData<typeof action>();
   const [searchParams] = useSearchParams();
   return (
-    <div className="container">
-      <div className="content" data-light="">
-        <h1>Login</h1>
+    <div className="container min-h-[inherit] flex flex-col justify-center items-center">
+      <div
+        data-light
+        className="flex flex-col justify-center items-center p-8 bg-white rounded-[5px] shadow-[0_0.2rem_1rem_rgb(0_0_0_.5)] w-[400px] max-w-full print:p-8 print:rounded-lg"
+      >
+        <h1 className="mt-0 font-bold">Login</h1>
         <Form method="post">
           <input
             type="hidden"
@@ -147,7 +150,7 @@ export default function Login() {
               searchParams.get("redirectTo") ?? undefined
             }
           />
-          <fieldset>
+          <fieldset className="flex justify-center [&>:not(:last-child)]:mr-8">
             <legend className="sr-only">
               Login or Register?
             </legend>
@@ -243,13 +246,13 @@ export default function Login() {
           </button>
         </Form>
       </div>
-      <div className="links">
-        <ul>
+      <div>
+        <ul className="my-4 p-0 flex gap-6 items-center">
           <li>
-            <Link to="/">Home</Link>
+            <Link to="/" className="hover-wavy">Home</Link>
           </li>
           <li>
-            <Link to="/jokes">Jokes</Link>
+            <Link to="/jokes" className="hover-wavy">Jokes</Link>
           </li>
         </ul>
       </div>
